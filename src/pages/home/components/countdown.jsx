@@ -52,7 +52,7 @@ function CountdownTimer() {
     }
   return (
     <Countdown
-    date={new Date("Feb 8 2026 11:59:49")}
+    date={new Date("Feb 12 2026 00:00:00")}
     renderer={renderer}
     ></Countdown>
   )
