@@ -1,0 +1,24 @@
+body{
+  background:#0A0A0A;
+  color:#EAEAEA;
+}
+
+/* GOLD TEXT */
+.gold{
+  color:#D4AF37;
+}
+
+/* GOLD BUTTON */
+.gold-btn{
+  background:#D4AF37;
+  color:black;
+  font-weight:600;
+  padding:12px 26px;
+  border-radius:12px;
+  transition:0.3s;
+}
+
+.gold-btn:hover{
+  background:#F5D97B;
+  transform:scale(1.05);
+}

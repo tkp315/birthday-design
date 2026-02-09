@@ -1,0 +1,49 @@
+@import "tailwindcss";
+body{
+  background:#0A0A0A;
+  color:#EAEAEA;
+}
+
+/* GOLD TEXT */
+.gold{
+  color:#D4AF37;
+}
+
+/* GOLD BUTTON */
+.gold-btn{
+  background:#D4AF37;
+  color:black;
+  font-weight:600;
+  padding:12px 26px;
+  border-radius:12px;
+  transition:0.3s;
+}
+
+.gold-btn:hover{
+  background:#F5D97B;
+  transform:scale(1.05);
+}
+@keyframes gradientMove {
+  0%{
+    background-position: 0% 50%;
+  }
+  50%{
+    background-position: 100% 50%;
+  }
+  100%{
+    background-position: 0% 50%;
+  }
+}
+.bubble {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(212,175,55,0.15);
+  filter: blur(8px);
+  animation: float 12s infinite ease-in-out;
+}
+
+@keyframes float {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-40px); }
+  100% { transform: translateY(0); }
+}
