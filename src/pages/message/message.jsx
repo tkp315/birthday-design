@@ -26,6 +26,7 @@ h-[500px]
 bg-yellow-500/10
 blur-[120px]
 rounded-full
+pointer-events-none
 "/>
 
 

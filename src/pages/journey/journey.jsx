@@ -1,37 +1,37 @@
 import React from "react";
 import { motion } from "framer-motion";
-import didiOne from '../../assets/images/di-one.jpeg'
-import didiTwo from '../../assets/images/di-two.jpeg'
-import didiThree from '../../assets/images/di-three.jpeg'
-import didiFour from '../../assets/images/di-four.jpeg'
-import hallOfFame from '../../assets/music/main-song.mp3'
+// import didiOne from '../../assets/images/di-one.jpeg'
+// import didiTwo from '../../assets/images/di-two.jpeg'
+// import didiThree from '../../assets/images/di-three.jpeg'
+// import didiFour from '../../assets/images/di-four.jpeg'
+// import hallOfFame from '../../assets/music/main-song.mp3'
 import { useRef,useEffect } from "react";
     const journeyData = [
 
 {
- img:didiOne,
+ img:"/images/di-one.jpeg",
  text:"She carries the warmth of home with effortless love and strength…"
 },
 
 {
- img:didiTwo,
+ img:"/images/di-two.jpeg",
  text:"Building her own path — learning, coding, and growing every single day 💻"
 },
 
 {
- img:didiThree,
+ img:"/images/di-three.jpeg",
  text:"Energetic, wise, and fearless… someone who rises stronger through every challenge ✨"
 },
 
 {
- img:didiFour,
+ img:"/images/di-four.jpeg",
  text:"Balancing dreams and responsibilities beautifully… with grace in everything she does 🌸"
 },
 
 ];
 
 function Journey() {
-  const musicRef = useRef(new Audio(hallOfFame));
+  const musicRef = useRef(new Audio("/music/main-song.mp3"));
 
 
   useEffect(() => {

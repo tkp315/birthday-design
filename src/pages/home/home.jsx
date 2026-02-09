@@ -42,7 +42,7 @@ text-center "
       {/* Countdown */}
       {/* Tere liye ek chhota sa surprise wait kar raha hai… ❤️  */}
       <audio ref={audioRef} loop hidden>
-        <source src="src\assets\music\home-page-music.mp3" type="audio/mp3" />
+        <source src="/music/home-page-music.mp3" type="audio/mp3" />
       </audio>
       <div className="relative flex gap-4">
         <div

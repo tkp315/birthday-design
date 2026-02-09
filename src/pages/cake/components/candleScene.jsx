@@ -2,9 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Cake from "./cake";
 
-import blowSound from "../../../assets/music/blow.mp3";
-import happyBirthday from "../../../assets/music/happy-birthday.mp3";
-import ambientMusic from '../../../assets/music/cake-bg.mp3'
+// import blowSound from "../../../assets/music/blow.mp3";
+// import happyBirthday from "../../../assets/music/happy-birthday.mp3";
+// import ambientMusic from '../../../assets/music/cake-bg.mp3'
 import CinematicText from "./cinematic-text";
 import Wish from "./wish";
 import CelebrationScene from "./celebration";
@@ -12,8 +12,8 @@ import Button from "./button";
 import { useNavigate } from "react-router-dom";
 function CandleScene() {
 
-  const blowRef = useRef(new Audio(blowSound));
-  const musicRef = useRef(new Audio(happyBirthday));
+  const blowRef = useRef(new Audio("/music/blow.mp3"));
+  const musicRef = useRef(new Audio("/music/happy-birthday.mp3"));
   const [stage,setStage] = useState("candle")
   const [showWish, setShowWish] = useState(false);
 
@@ -23,7 +23,7 @@ function CandleScene() {
     const onClick = ()=>{
         navigate("/journey");
     }
-const ambientRef = useRef(new Audio(ambientMusic));
+const ambientRef = useRef(new Audio("music/cake-bg.mp3"));
 
 
   const url =  "src/assets/images/cake-1-nobg.png"
