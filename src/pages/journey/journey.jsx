@@ -1,72 +1,84 @@
-import React from "react";
-import { motion } from "framer-motion";
-// import didiOne from '../../assets/images/di-one.jpeg'
-// import didiTwo from '../../assets/images/di-two.jpeg'
-// import didiThree from '../../assets/images/di-three.jpeg'
-// import didiFour from '../../assets/images/di-four.jpeg'
-// import hallOfFame from '../../assets/music/main-song.mp3'
-import { useRef,useEffect } from "react";
-    const journeyData = [
+import React, { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
+const journeyData = [
 {
  img:"/images/di-one.jpeg",
  text:"She carries the warmth of home with effortless love and strength…"
 },
-
 {
  img:"/images/di-two.jpeg",
  text:"Building her own path — learning, coding, and growing every single day 💻"
 },
-
 {
  img:"/images/di-three.jpeg",
  text:"Energetic, wise, and fearless… someone who rises stronger through every challenge ✨"
 },
-
 {
  img:"/images/di-four.jpeg",
  text:"Balancing dreams and responsibilities beautifully… with grace in everything she does 🌸"
 },
-
 ];
 
 function Journey() {
-  const musicRef = useRef(new Audio("/music/main-song.mp3"));
+
+const [index,setIndex] = useState(0);
+const musicRef = useRef(null);
+const hasStarted = useRef(false);
+
+// ✅ safer audio approach
+useEffect(()=>{
+
+ if(hasStarted.current) return;
+
+ const audio = new Audio("/music/main-song.mp3");
+
+ audio.volume = 0;
+ audio.loop = true;
+
+ // autoplay safe
+ const playAudio = () =>{
+   audio.play().catch(()=>{});
+   hasStarted.current = true;
+ };
+
+ playAudio();
+
+ // smooth fade-in
+ let vol = 0;
+
+ const fade = setInterval(()=>{
+   if(vol < 0.05){
+     vol += 0.005;
+     audio.volume = vol;
+   }else{
+     clearInterval(fade);
+   }
+ },200);
+
+ musicRef.current = audio;
+
+ return ()=>{
+   if(!musicRef.current) return;
+
+   let v = musicRef.current.volume;
+
+   const fadeOut = setInterval(()=>{
+     if(v > 0.01){
+       v -= 0.01;
+       musicRef.current.volume = v;
+     }else{
+       musicRef.current.pause();
+       clearInterval(fadeOut);
+     }
+   },80);
+ };
+
+},[]);
 
 
-  useEffect(() => {
-    const music = musicRef.current;
-    music.volume = 0;
-    music.loop = true;
-    music.play();
-
-    // smooth fade-in
-    let vol = 0;
-    const fadeIn = setInterval(() => {
-      if (vol < 0.05) {
-        vol += 0.005;
-        music.volume = vol;
-      } else {
-        clearInterval(fadeIn);
-      }
-    }, 200);
-
-    // fade-out on leave
-    return () => {
-      let v = music.volume;
-      const fadeOut = setInterval(() => {
-        if (v > 0.01) {
-          v -= 0.01;
-          music.volume = v;
-        } else {
-          music.pause();
-          clearInterval(fadeOut);
-           }
-      }, 80);
-    };
-  }, []);
-
-
+const current = journeyData[index];
+const reverse = index % 2 !== 0;
 
 return (
 
@@ -75,7 +87,24 @@ min-h-screen
 bg-black
 px-6
 py-28
+overflow-hidden
+relative
 ">
+
+{/* Glow */}
+<div className="
+absolute
+w-[600px]
+h-[600px]
+bg-yellow-500/10
+blur-[140px]
+rounded-full
+top-1/3
+left-1/2
+-translate-x-1/2
+pointer-events-none
+"/>
+
 
 {/* Heading */}
 <h1 className="
@@ -109,17 +138,17 @@ A story written with courage, grace, and a beautiful heart
 
 
 
-{/* JOURNEY BLOCKS */}
-<div className="mt-32 max-w-6xl mx-auto space-y-32">
+{/* MEMORY BLOCK */}
+<div className="mt-32 max-w-6xl mx-auto">
 
-{journeyData.map((item,i)=>{
+<AnimatePresence mode="wait">
 
-const reverse = i % 2 !== 0;
-
-return(
-
-<div
-key={i}
+<motion.div
+key={index}
+initial={{opacity:0,y:60}}
+animate={{opacity:1,y:0}}
+exit={{opacity:0,y:-60}}
+transition={{duration:0.8}}
 className={`
 flex
 flex-col md:flex-row
@@ -129,17 +158,14 @@ ${reverse ? "md:flex-row-reverse":""}
 `}
 >
 
-
 {/* PHOTO */}
 <motion.div
-initial={{opacity:0, scale:0.9}}
-whileInView={{opacity:1, scale:1}}
-transition={{duration:0.9}}
-viewport={{once:true}}
+initial={{scale:0.85,opacity:0}}
+animate={{scale:1,opacity:1}}
+transition={{duration:0.8}}
 className="relative"
 >
 
-{/* golden glow */}
 <div className="
 absolute
 w-full
@@ -147,14 +173,15 @@ h-full
 bg-yellow-500/10
 blur-3xl
 rounded-3xl
+pointer-events-none
 "/>
 
 <img
-src={item.img}
+src={current.img}
 className="
 relative
 w-[280px]
-md:w-[360px]
+md:w-[380px]
 rounded-3xl
 object-cover
 shadow-[0_0_60px_rgba(212,175,55,0.25)]
@@ -168,9 +195,8 @@ shadow-[0_0_60px_rgba(212,175,55,0.25)]
 {/* TEXT */}
 <motion.p
 initial={{opacity:0,y:40}}
-whileInView={{opacity:1,y:0}}
-transition={{duration:0.9}}
-viewport={{once:true}}
+animate={{opacity:1,y:0}}
+transition={{delay:0.2}}
 className="
 text-gray-300
 text-xl
@@ -181,33 +207,58 @@ max-w-xl
 text-center md:text-left
 "
 >
-{item.text}
+{current.text}
 </motion.p>
 
+</motion.div>
+
+</AnimatePresence>
 
 </div>
 
-);
-
-})}
-
-</div>
 
 
+{/* BUTTON */}
+<div className="flex justify-center mt-24">
 
-{/* END LINE */}
+{index < journeyData.length-1 ? (
+
+<motion.button
+onClick={()=>setIndex(prev=>prev+1)}
+whileHover={{scale:1.06}}
+whileTap={{scale:0.96}}
+className="
+px-12
+py-5
+rounded-full
+bg-gradient-to-r
+from-[#D4AF37]
+via-[#FFE27A]
+to-[#D4AF37]
+text-black
+tracking-[4px]
+font-semibold
+"
+>
+Next Memory →
+</motion.button>
+
+) : (
+
+<motion.div
+initial={{opacity:0}}
+animate={{opacity:1}}
+className="text-center"
+>
+
 <motion.p
 initial={{opacity:0,y:20}}
-whileInView={{opacity:1,y:0}}
-transition={{duration:1}}
-viewport={{once:true}}
+animate={{opacity:1,y:0}}
 className="
-mt-40
-text-center
+mb-10
 text-2xl
-md:text-3xl
-font-light
 tracking-[6px]
+font-light
 bg-gradient-to-r
 from-[#D4AF37]
 via-[#FFE27A]
@@ -219,8 +270,30 @@ bg-clip-text
 And the best chapters are yet to come… ✨
 </motion.p>
 
+
+<motion.button
+whileHover={{scale:1.06}}
+whileTap={{scale:0.96}}
+className="
+px-12
+py-5
+rounded-full
+border
+border-yellow-500/40
+text-yellow-400
+tracking-[4px]
+"
+>
+Continue →
+</motion.button>
+
+</motion.div>
+
+)}
+
 </div>
 
+</div>
 );
 }
 

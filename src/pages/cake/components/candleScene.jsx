@@ -26,7 +26,7 @@ function CandleScene() {
 const ambientRef = useRef(new Audio("music/cake-bg.mp3"));
 
 
-  const url =  "src/assets/images/cake-1-nobg.png"
+  const url =  "/images/cake-1-nobg.png"
     // stage === "candle"
      
     
