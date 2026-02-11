@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const journeyData = [
 {
@@ -18,6 +19,7 @@ const journeyData = [
  img:"/images/di-four.jpeg",
  text:"Balancing dreams and responsibilities beautifully… with grace in everything she does 🌸"
 },
+
 ];
 
 function Journey() {
@@ -25,7 +27,10 @@ function Journey() {
 const [index,setIndex] = useState(0);
 const musicRef = useRef(null);
 const hasStarted = useRef(false);
-
+const navigate = useNavigate()
+const handleNext = ()=>{
+navigate("/message")
+}
 // ✅ safer audio approach
 useEffect(()=>{
 
@@ -123,7 +128,20 @@ bg-clip-text
 Her Journey ✨
 </h1>
 
+<div className="flex justify-center gap-3 mt-10">
 
+{journeyData.map((_,i)=>(
+  <motion.div
+    key={i}
+    animate={{
+      width: i === index ? 26 : 10,
+      backgroundColor: i === index ? "#D4AF37" : "#444"
+    }}
+    className="h-[6px] rounded-full transition-all"
+  />
+))}
+
+</div>
 <p className="
 text-center
 mt-6
@@ -240,7 +258,7 @@ tracking-[4px]
 font-semibold
 "
 >
-Next Memory →
+→
 </motion.button>
 
 ) : (
@@ -272,6 +290,7 @@ And the best chapters are yet to come… ✨
 
 
 <motion.button
+onClick={handleNext}
 whileHover={{scale:1.06}}
 whileTap={{scale:0.96}}
 className="

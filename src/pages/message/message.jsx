@@ -84,8 +84,9 @@ font-light
 
 <p>
 Zindagi har kisi ko strong nahi banati…
-par tumne har challenge ko jis himmat se face kiya hai,
-woh mujhe hamesha inspire karta hai.
+par tune har situation ko  himmat se face kiya hai,
+mere se jyada ladka to tu hai chudail😂😂.
+Tu bahot strong hai dii 
 </p>
 
 <br/>
@@ -98,6 +99,34 @@ balki aur zyada chamakte hain ✨
 </p>
 
 <br/>
+<p>
+Didi sachhi, Tu bahot bahot bahot achhi hai, dil se bol raha hoon.
+Tune mujhe hamesha galat raasto par jaane se bachaya hai.
+Hn manta hoon mein bahot ziddi hu, nhi hai mujhe samajh kisi chiz ki 
+nhi hai mujhe bolne ka dhang, utpatang kuchh bhi bol deta hoon (mummy papa bhi meri isi problem se pareshan hai, mai jinse pyaar karta hoon insecure ho jata hoon.)
+lekin tune meri har galtiyon ko maaf kiya hai aur aage bhi kar dena please 
+🥰. 
+didi chahe hamare bich 959 km ka hi distance rahe but dil se kabhi dur nhi honge please 🧿
+</p>
+<br/>
+<br/>
+<p>
+Mummy Papa ke baad sirf tujh pe hi vishwas karta hoon didi tu gussa kar, maar, gali de, 
+daant, lekin kabhi bhi chup mat hona maanta hoon galtiya karta hoon nhi hoon achha, na hi perfect par jo bhi hoon 
+mummy papa ka beta aur tera bhai hoon.  
+</p>
+<br />
+<p>
+Dii end mein ye hi bolunga tu 
+Hamesha khush reh… aur zindagi mein har din  aage badhti reh ✨
+tujhe duniya ki sari khushiyan mile 
+
+</p>
+<br/>
+<p>
+    LOVE YOU SO MUCHH DIDAAAAAAAAAAAA 💞
+</p>
+
 
 <motion.p
 initial={{opacity:0}}
@@ -111,7 +140,7 @@ to-[#D4AF37]
 text-transparent
 bg-clip-text"
 >
-Mujhe tum par garv hai ❤️
+Pagal si  ❤️
 </motion.p>
 
 </motion.div>

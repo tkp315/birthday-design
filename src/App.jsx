@@ -6,6 +6,7 @@ import Home from './pages/home/home'
 import Birthday from './pages/cake/birthday'
 import Journey from './pages/journey/journey'
 import Message from './pages/message/message'
+import PromiseMessage from './pages/promise/promise-message'
 
 function App() {
  
@@ -16,6 +17,8 @@ function App() {
       <Route path='/cake' element={<Birthday/>}></Route>
       <Route path='/journey' element={<Journey/>}></Route>
        <Route path='/message' element={<Message/>}></Route>
+       <Route path='/promise-message' element={<PromiseMessage/>}></Route>
+
     </Routes>
   )
 }

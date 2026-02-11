@@ -14,136 +14,144 @@ const messages = [
 
 
 "Bachpan se to nhi par jab se hum mile hai",
+"Par jab se hum mile hai",
 "Meri har kahani mein ab tu bhi  h…",
-
+"Diiiiiiiiiiiiiiiii",
 "Kabhi dost ban kar…",
 "Kabhi teacher ban kar…",
 "Sari tension dur kar deti hai..",
 
 "Tu h toh sab kuch aasaan lagta hai…",
-
-"Hamesha Khush rehna…",
-
 ];
 const birthdayMessages = [
 
-"Today is not just another day…",
+"Bhagwan kare tu jo chahe… ",
+" sab tujhe mil jaaye 🌸",
 
-"It’s the day someone truly special was born…",
 
-"And without even realizing it…",
-"My life became a little more beautiful ❤️",
+"Tu jo soche…" ,
+"wo sab tu achieve kare ✨",
 
-"My wish for you is simple…",
+"Har din tere liye nayi umeed aur nayi roshni lekar aaye 🌈",
 
-"May your life always be filled with happiness…",
+"Yaad rakh Didu… tu kisi se kam nhi", 
+ "Bahut special hai ❤️",
 
-"May you never stop smiling…",
+"Tu jahan jaaye ",
+"wahan khushiyan apne aap aa jaaye 💫",
 
-"Happy ",
-"Birthday…",
+"Wishing you a very very",
 
-"Meri pyari pyari  Didu ❤️🎂"
+"Happy Birthday 🎂🎉",
+"Meri Pyari Didu..🥰"
 
 ];
+  const [index, setIndex] = useState(0);
+  const [phase, setPhase] = useState("normal");
 
-const [index,setIndex] = useState(0);
+  // ⏱️ text flow
+  useEffect(() => {
 
-const [phase,setPhase] = useState("normal");
-// auto text change
-useEffect(()=>{
+    if (phase === "normal") {
+      if (index === messages.length - 1) {
+        setTimeout(() => {
+          setPhase("birthday");
+          setIndex(0);
+        }, 2500);
+        return;
+      }
 
- if(phase === "normal"){
+      const t = setTimeout(() => {
+        setIndex(prev => prev + 1);
+      }, 3000);
 
-   if(index === messages.length-1){
+      return () => clearTimeout(t);
+    }
 
-     setTimeout(()=>{
-       setPhase("birthday");
-       setIndex(0);
-     },2500);
+    if (phase === "birthday") {
+      if (index === birthdayMessages.length - 1) {
+        setTimeout(() => {
+          setStage("cake-cut");
+        }, 5000);
+        return;
+      }
 
-     return;
-   }
+      const t = setTimeout(() => {
+        setIndex(prev => prev + 1);
+      }, 4200);
 
-   const timer = setTimeout(()=>{
-     setIndex(prev => prev + 1);
-   },3000);
+      return () => clearTimeout(t);
+    }
 
-   return ()=> clearTimeout(timer);
- }
+  }, [index, phase, setStage]);
 
+  const currentText =
+    phase === "normal" ? messages[index] : birthdayMessages[index];
 
- if(phase === "birthday"){
+  return (
+    <div
+      className="
+        min-h-screen
+        flex
+        items-center
+        justify-center
+        bg-[radial-gradient(circle_at_center,_#121212_0%,_#050505_60%,_#000_100%)]
+        relative
+        overflow-hidden
+      "
+    >
+      {/* ✨ Golden Glow */}
+      <div
+        className="
+          absolute
+          w-[600px]
+          h-[600px]
+          bg-yellow-500/10
+          blur-[140px]
+          rounded-full
+          pointer-events-none
+        "
+      />
 
-   if(index === birthdayMessages.length-1){
+      {/* 🎂 Cake (Background Anchor) */}
+      <motion.img
+        src="/images/cake-3-nobg.png"
+        alt="Cake"
+        initial={{ opacity: 0, y: 40 }}
+        animate={{
+          opacity: 1,
+          y: 0,
+          scale: phase === "birthday" ? 1.05 : 1,
+        }}
+        transition={{ duration: 1 }}
+        className="
+          absolute
+          
+          w-[260px]
+          md:w-[320px]
+          opacity-70
+          pointer-events-none
+        "
+      />
 
-     setTimeout(()=>{
-       setStage("cake-cut");
-     },5000);
-
-     return;
-   }
-
-   const timer = setTimeout(()=>{
-     setIndex(prev => prev + 1);
-   },4200); // 🔥 slower for emotion
-
-   return ()=> clearTimeout(timer);
- }
-
-},[index,phase]);
-
-return (
-
-<div className="
-min-h-screen
-flex
-items-center
-justify-center
-bg-[radial-gradient(circle_at_center,_#121212_0%,_#050505_60%,_#000_100%)]
-relative
-overflow-hidden
-">
-
-{/* Golden glow */}
-<div className="
-absolute
-w-[600px]
-h-[600px]
-bg-yellow-500/7
-blur-[140px]
-rounded-full
-"/>
-
-
-<AnimatePresence mode="wait">
-
-<motion.div
- key={phase === "normal"
- ? messages[index]
- : birthdayMessages[index]}
- initial={{opacity:0,y:40}}
- animate={{opacity:1,y:0}}
- exit={{opacity:0,y:-40}}
- transition={{duration:1}}
- className="text-center px-6"
->
-
-<CinematicText 
- text={phase === "normal"
-  ? messages[index]
-  : birthdayMessages[index]
- }
- isBirthday={phase === "birthday"}
-/>
-</motion.div>
-
-</AnimatePresence>
-
-</div>
-
-);
-
+      {/* 📝 Text */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentText}
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -40 }}
+          transition={{ duration: 1 }}
+          className="text-center px-6 z-10"
+        >
+          <CinematicText
+            text={currentText}
+            isBirthday={phase === "birthday"}
+          />
+        </motion.div>
+      </AnimatePresence>
+    </div>
+  );
 }
 
 export default Wish;
