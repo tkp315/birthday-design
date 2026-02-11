@@ -1,14 +1,14 @@
 import React, { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-
+import { useNavigate } from "react-router-dom";
 function PromiseMessage() {
-
+    const navigate = useNavigate();
 const promises = [
-"Tu kabhi ye nahi bologi ki tu mera bhai nahi hai… ❤️",
+"Tu kabhi ye nahi bologi ki mai  tera bhai nahi hoon ya Tu meri behen nhi hai  ❤️",
 
 "Tu hamesha mere saath rahegi…",
 
-"Promise kar ki apanastartup shuru karenge… 🚀",
+"Promise kar ki apan saath mein startup shuru karenge… 🚀",
 
 "Jab tujhe meri baat ka bura lage sidha mujhe daantegi, pura gussa nikalegi lekin kabhi chup nhi hogi(dur hu n isliye paas rahti to jo chahe kar leti) 🤍"
 ];
@@ -215,14 +215,40 @@ animate={{opacity:1}}
 transition={{delay:1}}
 className="text-gray-400 mt-6 text-lg"
 >
-Ab tum officially meri lifetime partner in crime ho 😄
+Aaj tu phir se mere se 5 saal badi ho gai 😒😂
 </motion.p>
+<motion.button
 
+initial={{opacity:0, y:20}}
+animate={{opacity:1, y:0}}
+transition={{delay:1.6}}
+whileHover={{scale:1.08}}
+whileTap={{scale:0.95}}
+onClick={()=>navigate('/last-page')} // 👈 route change kar lena
+className="
+mt-10
+px-10
+py-4
+rounded-full
+bg-gradient-to-r
+from-[#D4AF37]
+via-[#FFE27A]
+to-[#D4AF37]
+text-black
+font-semibold
+tracking-wide
+shadow-[0_0_40px_rgba(212,175,55,0.45)]
+"
+>
+Chal ye last hi hai 😄✨
+</motion.button>
 </motion.div>
 
 )}
 
 </AnimatePresence>
+{/* ⭐ NAVIGATION BUTTON */}
+
 
 </div>
 );

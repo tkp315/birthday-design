@@ -5,22 +5,81 @@ import { useNavigate } from "react-router-dom";
 const journeyData = [
 {
  img:"/images/di-one.jpeg",
- text:"She carries the warmth of home with effortless love and strength…"
+ text:"A beautiful person at heart — strong, kind, and someone who quietly makes life better for everyone around her ❤️"
 },
 {
  img:"/images/di-two.jpeg",
- text:"Building her own path — learning, coding, and growing every single day 💻"
+ text:"Building her career as a software developer while being the emotional backbone of the family… she does both effortlessly."
 },
 {
  img:"/images/di-three.jpeg",
- text:"Energetic, wise, and fearless… someone who rises stronger through every challenge ✨"
+ text:"No matter how busy her days get, she never forgets to care, to listen, and to stand beside the people she loves 💻✨"
 },
 {
  img:"/images/di-four.jpeg",
- text:"Balancing dreams and responsibilities beautifully… with grace in everything she does 🌸"
+ text:"Independent in her dreams, selfless in her love — a rare balance that makes her truly special 🌸"
 },
-
+{
+ img:"/images/di-one.jpeg",
+ text:"The one who carries responsibilities with a smile, even when no one notices the weight she holds."
+},
+{
+ img:"/images/di-two.jpeg",
+ text:"Turning challenges into growth and hard work into success… she inspires more than she realizes."
+},
+{
+ img:"/images/di-three.jpeg",
+ text:"For friends she is dependable, for family she is strength, and for me… she is irreplaceable ❤️"
+},
+{
+ img:"/images/di-four.jpeg",
+ text:"More than just my sister — she is my safe place, my guide, and one of the greatest blessings in my life."
+},
 ];
+
+// ✨ Writing Animation Component
+function WritingText({ text, delay = 0 }) {
+  const [displayText, setDisplayText] = useState("");
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    setDisplayText("");
+    setCurrentIndex(0);
+  }, [text]);
+
+  useEffect(() => {
+    if (currentIndex < text.length) {
+      const timeout = setTimeout(() => {
+        setDisplayText(prev => prev + text[currentIndex]);
+        setCurrentIndex(prev => prev + 1);
+      }, 30); // typing speed (adjust karo)
+
+      return () => clearTimeout(timeout);
+    }
+  }, [currentIndex, text]);
+
+  return (
+    <motion.p
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay }}
+      className="
+        text-gray-300
+        text-xl
+        md:text-2xl
+        font-light
+        tracking-wide
+        max-w-xl
+        text-center md:text-left
+      "
+    >
+      {displayText}
+      {currentIndex < text.length && (
+        <span className="animate-pulse">|</span>
+      )}
+    </motion.p>
+  );
+}
 
 function Journey() {
 
@@ -31,7 +90,7 @@ const navigate = useNavigate()
 const handleNext = ()=>{
 navigate("/message")
 }
-// ✅ safer audio approach
+
 useEffect(()=>{
 
  if(hasStarted.current) return;
@@ -41,7 +100,6 @@ useEffect(()=>{
  audio.volume = 0;
  audio.loop = true;
 
- // autoplay safe
  const playAudio = () =>{
    audio.play().catch(()=>{});
    hasStarted.current = true;
@@ -49,7 +107,6 @@ useEffect(()=>{
 
  playAudio();
 
- // smooth fade-in
  let vol = 0;
 
  const fade = setInterval(()=>{
@@ -210,23 +267,8 @@ shadow-[0_0_60px_rgba(212,175,55,0.25)]
 
 
 
-{/* TEXT */}
-<motion.p
-initial={{opacity:0,y:40}}
-animate={{opacity:1,y:0}}
-transition={{delay:0.2}}
-className="
-text-gray-300
-text-xl
-md:text-2xl
-font-light
-tracking-wide
-max-w-xl
-text-center md:text-left
-"
->
-{current.text}
-</motion.p>
+{/* TEXT with Writing Animation */}
+<WritingText text={current.text} delay={0.7} />
 
 </motion.div>
 

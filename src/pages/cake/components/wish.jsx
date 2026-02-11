@@ -5,53 +5,36 @@ import CinematicText from "./cinematic-text";
 function Wish({ setStage }) {
 
 const messages = [
-
-"Kabhi gussa karti h…",
-"Kabhi daant deti h…",
-"To khabi mujhse ruth jaati h…",
-"Kabhi meri harkaton par chillati h…",
-"To Kabhi pyaar karti hai",
-
-
-"Bachpan se to nhi par jab se hum mile hai",
-"Par jab se hum mile hai",
-"Meri har kahani mein ab tu bhi  h…",
-"Diiiiiiiiiiiiiiiii",
-"Kabhi dost ban kar…",
-"Kabhi teacher ban kar…",
-"Sari tension dur kar deti hai..",
-
-"Tu h toh sab kuch aasaan lagta hai…",
+  "Kabhi Sweet hai .. ",
+  "To hai kabhi salty 😁",
+  "Kabhi meri harkaton par chillati h…",
+  "To Kabhi pyaar se deal karti hai",
+  "Kabhi dost ban kar…",
+  "To kabi teacher ban kar…",
+  "Sari tension dur kar deti hai..",
 ];
+
 const birthdayMessages = [
-
-"Bhagwan kare tu jo chahe… ",
-" sab tujhe mil jaaye 🌸",
-
-
-"Tu jo soche…" ,
-"wo sab tu achieve kare ✨",
-
-"Har din tere liye nayi umeed aur nayi roshni lekar aaye 🌈",
-
-"Yaad rakh Didu… tu kisi se kam nhi", 
- "Bahut special hai ❤️",
-
-"Tu jahan jaaye ",
-"wahan khushiyan apne aap aa jaaye 💫",
-
-"Wishing you a very very",
-
-"Happy Birthday 🎂🎉",
-"Meri Pyari Didu..🥰"
-
+  "Meri Pyari Didu..🥰",
+  "Bhagwan kare tu jo chahe… ",
+  " sab tujhe mil jaaye 🌸",
+  "Tu jo soche…" ,
+  "wo sab tu achieve kare ✨",
+  "Har din tere liye nayi umeed aur nayi roshni lekar aaye 🌈",
+  "Yaad rakh Didu… tu kisi se kam nhi", 
+  "Bahut special hai ❤️",
+  "Tu jahan jaaye ",
+  "wahan khushiyan apne aap aa jaaye 💫",
+  "Wishing you 🌠",
+  "A very very ",
+  "Happy Birthday 🎂🎉",
+  "Diduu"
 ];
+
   const [index, setIndex] = useState(0);
   const [phase, setPhase] = useState("normal");
 
-  // ⏱️ text flow
   useEffect(() => {
-
     if (phase === "normal") {
       if (index === messages.length - 1) {
         setTimeout(() => {
@@ -93,11 +76,12 @@ const birthdayMessages = [
       className="
         min-h-screen
         flex
+        flex-col
         items-center
-        justify-center
         bg-[radial-gradient(circle_at_center,_#121212_0%,_#050505_60%,_#000_100%)]
         relative
         overflow-hidden
+        py-8
       "
     >
       {/* ✨ Golden Glow */}
@@ -113,7 +97,27 @@ const birthdayMessages = [
         "
       />
 
-      {/* 🎂 Cake (Background Anchor) */}
+      {/* 📝 Text (Top) */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentText}
+          initial={{ opacity: 0, y: -40 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -40 }}
+          transition={{ duration: 1.5 }}
+          className="text-center px-6 z-10 mt-8"
+        >
+          <CinematicText
+            text={currentText}
+            isBirthday={phase === "birthday"}
+          />
+        </motion.div>
+      </AnimatePresence>
+
+      {/* Spacer */}
+      <div className="flex-1" />
+
+      {/* 🎂 Cake (Bottom) */}
       <motion.img
         src="/images/cake-3-nobg.png"
         alt="Cake"
@@ -125,31 +129,14 @@ const birthdayMessages = [
         }}
         transition={{ duration: 1 }}
         className="
-          absolute
-          
           w-[260px]
           md:w-[320px]
           opacity-70
           pointer-events-none
+          z-10
+          mb-8
         "
       />
-
-      {/* 📝 Text */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={currentText}
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -40 }}
-          transition={{ duration: 1 }}
-          className="text-center px-6 z-10"
-        >
-          <CinematicText
-            text={currentText}
-            isBirthday={phase === "birthday"}
-          />
-        </motion.div>
-      </AnimatePresence>
     </div>
   );
 }
